@@ -16,9 +16,6 @@ tail -n +2 keywords.csv > data_for_loading/keywords.csv
 tail -n +2 links_small.csv > data_for_loading/links_small.csv
 tail -n +2 ratings_small.csv > data_for_loading/links_small.csv
 
-#transfer files to EC2 from local machine
-#on local machine
-scp -r -i ~/foo.pem ~/Desktop/w205/Final_Project/Raw_Data/the-movies-dataset/data_for_loading/*.csv root@ec2-34-207-148-31.compute-1.amazonaws.com:/data/movie_project
 
 #log into EC2 instance
 cd $2
@@ -45,3 +42,8 @@ hdfs dfs -put ratings_small.csv /user/w205/movie_project/ratings_small
 
 #check whether all base files are transferred
 hdfs dfs -ls -R /user/w205/movie_project/
+
+#transfer files to EC2 from local machine
+#on local machine
+scp -r -i ~/foo.pem ~/Desktop/w205/Final_Project/Raw_Data/the-movies-dataset/data_for_loading/*.csv root@ec2-34-238-238-208.compute-1.amazonaws.com:/data/movie_project
+scp -i ~/foo.pem ~/Desktop/w205/Final_Project/Raw_Data/the-movies-dataset/hive_base_ddl.sql root@ec2-34-238-238-208.compute-1.amazonaws.com:/data/movie_project/SQL_scripts
