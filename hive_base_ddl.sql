@@ -136,3 +136,22 @@ WITH SERDEPROPERTIES(
 STORED AS TEXTFILE
 LOCATION '/user/w205/movie_project/ratings_small'
 ;
+
+DROP TABLE movies;
+
+CREATE EXTERNAL TABLE movies
+(
+movieid string,
+title string,
+genres string
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES(
+"separatorChar" = ",",
+"quoteChar" = '"',
+"escapeChar" = '\\
+'
+)
+STORED AS TEXTFILE
+LOCATION '/user/w205/movie_project/movies'
+;
