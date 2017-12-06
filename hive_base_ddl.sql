@@ -86,7 +86,7 @@ belongs_to_collection string,
 budget string,
 genres string,
 homepage string,
-id string,
+tmdb_id string,
 imdb_id string,
 original_language string,
 original_title string,
@@ -137,13 +137,31 @@ STORED AS TEXTFILE
 LOCATION '/user/w205/movie_project/ratings_small'
 ;
 
-DROP TABLE movies;
+-- DROP TABLE movies;
+--
+-- CREATE EXTERNAL TABLE movies
+-- (
+-- movie_id string,
+-- title string,
+-- genres string
+-- )
+-- ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+-- WITH SERDEPROPERTIES(
+-- "separatorChar" = ",",
+-- "quoteChar" = '"',
+-- "escapeChar" = '\\
+-- '
+-- )
+-- STORED AS TEXTFILE
+-- LOCATION '/user/w205/movie_project/movies'
+-- ;
 
-CREATE EXTERNAL TABLE movies
+DROP TABLE actors;
+
+CREATE EXTERNAL TABLE actors
 (
-movieid string,
-title string,
-genres string
+tmdb_id string,
+actor string
 )
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
 WITH SERDEPROPERTIES(
@@ -153,5 +171,27 @@ WITH SERDEPROPERTIES(
 '
 )
 STORED AS TEXTFILE
-LOCATION '/user/w205/movie_project/movies'
+LOCATION '/user/w205/movie_project/actors'
+;
+
+
+DROP TABLE movie_factors;
+
+CREATE EXTERNAL TABLE movie_factors
+(
+tmdb_id string,
+genres string,
+prod_co string,
+prod_country string,
+language string
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES(
+"separatorChar" = ",",
+"quoteChar" = '"',
+"escapeChar" = '\\
+'
+)
+STORED AS TEXTFILE
+LOCATION '/user/w205/movie_project/movie_factors'
 ;
