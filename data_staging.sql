@@ -46,7 +46,7 @@ drop table movie_baseline;
 create table movie_baseline as
 select distinct
       adult,
-      --belongs_to_collection,
+      case when substring(belongs_to_collection, 1, 1) = '{' then "Yes" else "No" end as belongs_to_collection,
       budget,
       --a.genres,
       --homepage,
