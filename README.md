@@ -1,15 +1,15 @@
 # The Movie Project
 Predictors for Movie Box Office Success
 
-##Introduction:   
+**Introduction:**
 
 This project looks at the public movie metadata (from Tmdb) and user ratings (MovieLens | GroupLens) to analyze predictors of the movie revenue.
 
-##Source Data:  
+**Source Data:**
 
 https://drive.google.com/drive/u/1/folders/15oQXi-hZxMLFGqLtCPVHftqMkciz4DWT (access with berkeley email address)
 
-##Important Scripts:  
+**Important Scripts:**  
 
 *clean_data.py* - python script to normalize JSON strings in source data
 
