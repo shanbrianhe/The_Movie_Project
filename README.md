@@ -19,7 +19,7 @@ hive_base_ddl.sql - sql script to create tables and impose schema based on the s
 
 data_staging.sql - sql script to stage tables for analysis
 
-ML_Model/movie_project_ML_modelling - ipython notebook that constructs Machine Learning Models for collected data
+ML_Model/movie_project_ML_modeling - ipython notebook that constructs Machine Learning Models for collected data
 
 
 
