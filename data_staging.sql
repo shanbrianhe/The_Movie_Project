@@ -48,7 +48,7 @@ select distinct
       adult,
       case when substring(belongs_to_collection, 1, 1) = '{' then "Yes" else "No" end as belongs_to_collection,
       budget,
-      --a.genres,
+      genres,
       --homepage,
       a.tmdb_id,
       a.imdb_id,
@@ -71,10 +71,8 @@ select distinct
       vote_count
       --c.genres as genres_n
 from movies_metadata a
-left join links b
-on a.tmdb_id = b.tmdb_id
-left join movies c
-on b.movie_id = c.movie_id
+-- left join links b
+-- on a.tmdb_id = b.tmdb_id
 where a.tmdb_id is not null
 and cast(a.tmdb_id as int) is not null
 ;
@@ -172,7 +170,6 @@ from movie_factors_dedupe lateral view explode(split(prod_country,', ')) prod_co
 
 -- 5. All-inclusive Table
 
--- check uniquess of movie_baseline
 drop table movie_all;
 
 create table movie_all as
@@ -197,3 +194,18 @@ on a.tmdb_id = f.tmdb_id
 
 select count(*) from movie_all;
 -- 6910651
+
+-- 6. Simple table for Machine Learning Analysis
+
+drop table movie_baseline_genre;
+
+create table movie_baseline_genre as
+select a.*,
+       b.genres
+from movie_baseline a
+join movie_factors_dedupe b
+on a.tmdb_id = b.tmdb_id
+;
+
+select count(*) from movie_baseline_genre;
+-- 45446
